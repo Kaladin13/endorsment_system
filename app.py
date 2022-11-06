@@ -15,14 +15,14 @@ connection = postgres.connect(user="postgres",
                               host="127.0.0.1",
                               port="5432")
 db.init_app(app)
-#Рекомендацию категории на проект
+#Рекомендация категории на проект
 @app.route('/category_name_by_role_uuid/<project_uuid>')
 def category_by_project_uuid(project_uuid):
     responce = jsonify(recommend.get_category_by_role(project_uuid, connection))
     responce.headers.add("Access-Control-Allow-Origin", "*")
     return responce
 
-#Рекомендацию вакансию на проект
+#Рекомендация вакансию на проект
 @app.route('/role_by_project_uuid/<project_uuid>')
 def role_by_project_uuid(project_uuid):
     responce = jsonify(recommend.get_role_by_project_uuid(project_uuid, connection))
