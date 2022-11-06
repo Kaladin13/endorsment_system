@@ -16,6 +16,14 @@ def projects_(project_id):
     except Exception as e:
         return bad_request('Error when fetching projects')
 
+def projects_by_user_uud(project_id):
+    try:
+        projects_data = Project.query.join(Project.lineups)
+        project = [x for x in projects_data if x.id == int(project_id)][0]
+        return project.serialize
+        # return [pr.serialize for pr in projects_data]
+    except Exception as e:
+        return bad_request('Error when fetching projects')
 
 def recommend_users(project_uuid):
     try:
